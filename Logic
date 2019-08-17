@@ -1,0 +1,9 @@
+RSA algorithm
+
+PUBLIC KEY = X
+PRIVATE KEY = Y
+
+X.Y = (P - 1)(Q - 1) + 1
+
+Encryption Process : (message^x) % PQ
+Decryption Process : (message^y) % PQ
