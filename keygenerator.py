@@ -42,7 +42,7 @@ def gcd(x, y):
 
 
 def gcdInverse(relCoPrime, phi):
-    return
+    return 0
 
 
 def keypairGenerator(p, q):
