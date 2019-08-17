@@ -2,6 +2,7 @@ RSA algorithm
 
 PUBLIC KEY = X
 PRIVATE KEY = Y
+PQ = Primes relative to x , y || modulo to  x y
 
 X.Y = (P - 1)(Q - 1) + 1
 
