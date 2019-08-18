@@ -35,6 +35,10 @@ def initialise():
                     print("P Q cannot be same prime\n")
                 else:
                     areEqual = False
+    privatekey = keypairGenerator(p, q)
+    print("Private key : ", privatekey)
+    publickey = keypairGenerator(p, q)
+    print("Public key : ", publickey)
 
 
 def gcd(x, y):
@@ -78,6 +82,10 @@ def keypairGenerator(p, q):
     while g != 1:
         relCoPrime = random.randrange(1, phi)
         g = gcd(relCoPrime, phi)
+
+    gi = gcdInverse(relCoPrime, phi)
+
+    return ((relCoPrime, n)(gi, n))
 
 
 initialise()
