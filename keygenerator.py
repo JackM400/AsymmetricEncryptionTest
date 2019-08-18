@@ -47,7 +47,7 @@ def gcd(x, y):
     return x
 
 
-def gcdInverse(e, phi):
+def gcdInverse(relCoPrime, phi):
     d = 0
     x1 = 0
     x2 = 1
@@ -55,9 +55,9 @@ def gcdInverse(e, phi):
     temp_phi = phi
 
     while relCoPrime > 0:
-        temp1 = temp_phi / e
-        temp2 = temp_phi - temp1 * e
-        temp_phi = e
+        temp1 = temp_phi // relCoPrime
+        temp2 = temp_phi - temp1 * relCoPrime
+        temp_phi = relCoPrime
         relCoPrime = temp2
 
         x = x2 - temp1 * x1
@@ -80,12 +80,14 @@ def keypairGenerator(p, q):
     # check relCoPrime  and phi are relatively prime
     g = gcd(relCoPrime, phi)
     while g != 1:
+        # variable relcoprime is coprime to  e,phi
         relCoPrime = random.randrange(1, phi)
         g = gcd(relCoPrime, phi)
 
+    # extend Euclids to get private key
     gi = gcdInverse(relCoPrime, phi)
 
-    return ((relCoPrime, n)(gi, n))
+    return ((relCoPrime, n), (gi, n))
 
 
 initialise()
