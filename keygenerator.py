@@ -55,7 +55,7 @@ def gcdInverse(relCoPrime, phi):
     temp_phi = phi
 
     while relCoPrime > 0:
-        temp1 = temp_phi // relCoPrime
+        temp1 = temp_phi // relCoPrime  # / for python 2 , // for 3
         temp2 = temp_phi - temp1 * relCoPrime
         temp_phi = relCoPrime
         relCoPrime = temp2
@@ -89,5 +89,11 @@ def keypairGenerator(p, q):
 
     return ((relCoPrime, n), (gi, n))
 
+def encrypt(privatekey,message):
+    encryptedmessage = ""
+    return encryptedmessage
+def decrypt(publickey,encryptedmessage):
+    decryptedmessage = ""
+    return decryptedmessage
 
 initialise()
