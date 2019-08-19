@@ -43,7 +43,6 @@ def initialise():
     print("Message to Transmit :".join(map(lambda x: str(x), encryptedmessage)))
 
 
-
 def gcd(x, y):
     while y != 0:
         (x, y) = (y, x % y)
@@ -90,15 +89,20 @@ def keypairGenerator(p, q):
     # extend Euclids to get private key
     gi = gcdInverse(relCoPrime, phi)
 
-    return ((relCoPrime, n), (gi, n))
+    return (relCoPrime, n), (gi, n)
 
 
 def encrypt(privatekey, message):
     # Encrypt ==> (message^x) % PQ
     # break key up
-    pk = privatekey
-    n = privatekey
-    encryptedmessage = [(ord(char) ** (privatekey)) % n for char in message]
+    lhs1, rhs1 = privatekey
+    lhs2, rhs2 = lhs1
+    print(lhs1)
+    print(rhs1)
+    # of ((a,b) ,(c,d))
+    # what are x , y?
+
+    encryptedmessage = [(ord(char) ** lhs1) % rhs1 for char in message]
     return encryptedmessage
 
 
