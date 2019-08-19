@@ -89,11 +89,16 @@ def keypairGenerator(p, q):
 
     return ((relCoPrime, n), (gi, n))
 
-def encrypt(privatekey,message):
-    encryptedmessage = ""
-    return encryptedmessage
-def decrypt(publickey,encryptedmessage):
+
+def encrypt(privatekey, message):
+    # Encrypt ==> (message^x) % PQ
+    # break key up
+    n = privatekey
+
+
+def decrypt(publickey, encryptedmessage):
     decryptedmessage = ""
     return decryptedmessage
+
 
 initialise()
