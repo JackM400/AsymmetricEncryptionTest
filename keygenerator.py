@@ -39,7 +39,9 @@ def initialise():
     print("Private key : ", privatekey)
     publickey = keypairGenerator(p, q)
     print("Public key : ", publickey)
-    encrypt(privatekey, message)
+    encryptedmessage = encrypt(privatekey, message)
+    print("Message to Transmit :".join(map(lambda x: str(x), encryptedmessage)))
+
 
 
 def gcd(x, y):
@@ -94,8 +96,10 @@ def keypairGenerator(p, q):
 def encrypt(privatekey, message):
     # Encrypt ==> (message^x) % PQ
     # break key up
+    pk = privatekey
     n = privatekey
-    encryptedmessage = ((char ** privatekey) % n) for char in encryptedmessage
+    encryptedmessage = [(ord(char) ** (privatekey)) % n for char in message]
+    return encryptedmessage
 
 
 def decrypt(publickey, encryptedmessage):
