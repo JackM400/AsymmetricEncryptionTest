@@ -94,7 +94,9 @@ def keypairGenerator(p, q):
 
 def encrypt(privatekey, message):
     # Encrypt ==> (message^x) % PQ
-    # break key up
+    # break up privatekey tuple
+    # privatekey = (relCoPrime, n), (gi, n)
+    # 2 degree tuple (relCoPrime, n) + (gi, n)
     lhs1, rhs1 = privatekey
     lhs2, rhs2 = lhs1
     print(lhs1)
@@ -107,7 +109,10 @@ def encrypt(privatekey, message):
 
 
 def decrypt(publickey, encryptedmessage):
-    lhs,rhs = publickey
+    # Decryption Process : (message^y) % PQ
+    # break up publickey tuple
+    # publickey = (relCoPrime, n), (gi, n)
+    lhs, rhs = publickey
 
     decryptedmessage = [chr((char ** lhs) % rhs) for char in encryptedmessage]
     return decryptedmessage
