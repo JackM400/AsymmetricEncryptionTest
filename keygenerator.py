@@ -107,7 +107,9 @@ def encrypt(privatekey, message):
 
 
 def decrypt(publickey, encryptedmessage):
-    decryptedmessage = ""
+    lhs,rhs = publickey
+
+    decryptedmessage = [chr((char ** lhs) % rhs) for char in encryptedmessage]
     return decryptedmessage
 
 
