@@ -41,6 +41,9 @@ def initialise():
     print("Public key : ", publickey)
     encryptedmessage = encrypt(privatekey, message)
     print("Message to Transmit :".join(map(lambda x: str(x), encryptedmessage)))
+    print("message decrypted : ")
+    decryptedmessage = decrypt(publickey,encryptedmessage)
+    print(decryptedmessage)
 
 
 def gcd(x, y):
