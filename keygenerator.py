@@ -29,6 +29,13 @@ def generatePrime(index):
     return number
 
 
+def getnumber():
+    val = input("Generate primes\n")
+    val = int(val)
+    prime1 = generatePrime(val)
+    print(prime1)
+
+
 def initialise():
     message = input("Input message to encrypt\n")
     areEqual = True
