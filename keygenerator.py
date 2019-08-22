@@ -17,6 +17,18 @@ def primeCheck(number):
     return True
 
 
+def generatePrime(index):
+    number = 3
+    primeindex = 2
+    if index == 1:
+        return 2
+    while primeindex < index:
+        number = number + 2
+        if primeCheck(number):
+            primeindex = primeindex +1
+    return number
+
+
 def initialise():
     message = input("Input message to encrypt\n")
     areEqual = True
@@ -42,7 +54,7 @@ def initialise():
     encryptedmessage = encrypt(privatekey, message)
     print("Message to Transmit :".join(map(lambda x: str(x), encryptedmessage)))
     print("message decrypted : ")
-    decryptedmessage = decrypt(publickey,encryptedmessage)
+    decryptedmessage = decrypt(publickey, encryptedmessage)
     print(decryptedmessage)
 
 
@@ -120,5 +132,5 @@ def decrypt(publickey, encryptedmessage):
     decryptedmessage = [chr((char ** lhs) % rhs) for char in encryptedmessage]
     return decryptedmessage
 
-
+getnumber()
 initialise()
