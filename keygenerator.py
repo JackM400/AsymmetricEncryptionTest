@@ -114,7 +114,7 @@ def encrypt(privatekey, message):
     # of ((a,b) ,(c,d))
     # what are x , y?
 
-    encryptedmessage = [(ord(char) ** lhs1) % rhs1 for char in message]
+    encryptedmessage = [(ord(char) ** lhs2) % lhs1 for char in message]
     return encryptedmessage
 
 
@@ -122,9 +122,10 @@ def decrypt(publickey, encryptedmessage):
     # Decryption Process : (message^y) % PQ
     # break up publickey tuple
     # publickey = (relCoPrime, n), (gi, n)
-    lhs, rhs = publickey
+    lhs1, rhs1 = publickey
+    lhs2, rhs2 = lhs1
 
-    decryptedmessage = [chr((char ** lhs) % rhs) for char in encryptedmessage]
+    decryptedmessage = [chr((char ** lhs2) % lhs1) for char in encryptedmessage]
     return decryptedmessage
 
 
