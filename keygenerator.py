@@ -25,35 +25,23 @@ def generatePrime(index):
     while primeindex < index:
         number = number + 2
         if primeCheck(number):
-            primeindex = primeindex +1
+            primeindex = primeindex + 1
     return number
 
 
-def getnumber():
-    val = input("Generate primes\n")
-    val = int(val)
-    prime1 = generatePrime(val)
-    print(prime1)
-
-
 def initialise():
-    message = input("Input message to encrypt\n")
+    # message = input("Input message to encrypt\n")
+    message = "My name isn’t slick, it’s Zoidberg. JOHN F***ING ZOIDBERG!"
     areEqual = True
     while areEqual:
-        pCheck = False
-        while not pCheck:
-            p = int(input("Input a prime, P\n"))
-            if primeCheck(p):
-                pCheck = True
-            qCheck = False
-            while not qCheck:
-                q = int(input("Input a prime, Q\n"))
-                if primeCheck(q):
-                    qCheck = True
-                if p == q:
-                    print("P Q cannot be same prime\n")
-                else:
-                    areEqual = False
+        p = generatePrime(random.randint(4500, 15000))
+        q = generatePrime(random.randint(4500, 15000))
+        print("p :", p)
+        print("q :", q)
+        if p == q:
+            areEqual = True
+        else:
+            areEqual = False
     privatekey = keypairGenerator(p, q)
     print("Private key : ", privatekey)
     publickey = keypairGenerator(p, q)
@@ -139,5 +127,5 @@ def decrypt(publickey, encryptedmessage):
     decryptedmessage = [chr((char ** lhs) % rhs) for char in encryptedmessage]
     return decryptedmessage
 
-getnumber()
+
 initialise()
