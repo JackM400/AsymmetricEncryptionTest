@@ -86,7 +86,7 @@ def gcdInverse(relCoPrime, phi):
 
 def keypairGenerator(p, q):
     n = p * q
-    phi = (p - 1) * (q - 1)
+    phi = (p - 1) * (q - 1) + 1
     relCoPrime = random.randrange(1, phi)
 
     # check relCoPrime  and phi are relatively prime
@@ -115,6 +115,7 @@ def encrypt(privatekey, message):
     # what are x , y?
 
     encryptedmessage = [(ord(char) ** lhs2) % lhs1 for char in message]
+    print('Encrypted Message: ', encryptedmessage)
     return encryptedmessage
 
 
