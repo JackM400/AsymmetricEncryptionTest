@@ -3,7 +3,7 @@ import random
 
 
 # check if number provided is prime
-def primeCheck(number):
+def prime_check(number):
     if number == 2:
         return True
     if number % 2 == 0 or number <= 1:
@@ -17,40 +17,40 @@ def primeCheck(number):
     return True
 
 
-def generatePrime(index):
+def generate_prime(index):
     number = 3
-    primeindex = 2
+    prime_index = 2
     if index == 1:
         return 2
-    while primeindex < index:
+    while prime_index < index:
         number = number + 2
-        if primeCheck(number):
-            primeindex = primeindex + 1
+        if prime_check(number):
+            prime_index = prime_index + 1
     return number
 
 
 def initialise():
     # message = input("Input message to encrypt\n")
     message = "My name isn’t slick, it’s Zoidberg. JOHN F***ING ZOIDBERG!"
-    areEqual = True
-    while areEqual:
-        p = generatePrime(random.randint(4500, 15000))
-        q = generatePrime(random.randint(4500, 15000))
+    are_equal = True
+    while are_equal:
+        p = generate_prime(random.randint(4500, 15000))
+        q = generate_prime(random.randint(4500, 15000))
         print("p :", p)
         print("q :", q)
         if p == q:
-            areEqual = True
+            are_equal = True
         else:
-            areEqual = False
-    privatekey = keypairGenerator(p, q)
-    print("Private key : ", privatekey)
-    publickey = keypairGenerator(p, q)
-    print("Public key : ", publickey)
-    encryptedmessage = encrypt(privatekey, message)
-    print("Message to Transmit :".join(map(lambda x: str(x), encryptedmessage)))
+            are_equal = False
+    private_key = key_pair_generator(p, q)
+    print("Private key : ", private_key)
+    public_key = key_pair_generator(p, q)
+    print("Public key : ", public_key)
+    encrypted_message = encrypt(private_key, message)
+    print("Message to Transmit :".join(map(lambda x: str(x), encrypted_message)))
     print("message decrypted : ")
-    decryptedmessage = decrypt(publickey, encryptedmessage)
-    print(decryptedmessage)
+    decrypted_message = decrypt(public_key, encrypted_message)
+    print(decrypted_message)
 
 
 def gcd(x, y):
@@ -59,18 +59,18 @@ def gcd(x, y):
     return x
 
 
-def gcdInverse(relCoPrime, phi):
+def gcd_inverse(relative_co_prime, phi):
     d = 0
     x1 = 0
     x2 = 1
     y1 = 1
     temp_phi = phi
 
-    while relCoPrime > 0:
-        temp1 = temp_phi // relCoPrime  # / for python 2 , // for 3
-        temp2 = temp_phi - temp1 * relCoPrime
-        temp_phi = relCoPrime
-        relCoPrime = temp2
+    while relative_co_prime > 0:
+        temp1 = temp_phi // relative_co_prime  # / for python 2 , // for 3
+        temp2 = temp_phi - temp1 * relative_co_prime
+        temp_phi = relative_co_prime
+        relative_co_prime = temp2
 
         x = x2 - temp1 * x1
         y = d - temp1 * y1
@@ -81,53 +81,54 @@ def gcdInverse(relCoPrime, phi):
         y1 = y
 
     if temp_phi == 1:
+        assert isinstance(phi, object)
         return d + phi
 
 
-def keypairGenerator(p, q):
+def key_pair_generator(p, q):
     n = p * q
     phi = (p - 1) * (q - 1) + 1
-    relCoPrime = random.randrange(1, phi)
+    rel_co_prime = random.randrange(1, phi)
 
-    # check relCoPrime  and phi are relatively prime
-    g = gcd(relCoPrime, phi)
+    # check rel_co_prime  and phi are relatively prime
+    g = gcd(rel_co_prime, phi)
     while g != 1:
         # variable relcoprime is coprime to  e,phi
-        relCoPrime = random.randrange(1, phi)
-        g = gcd(relCoPrime, phi)
+        rel_co_prime = random.randrange(1, phi)
+        g = gcd(rel_co_prime, phi)
 
     # extend Euclids to get private key
-    gi = gcdInverse(relCoPrime, phi)
+    gi = gcd_inverse(rel_co_prime, phi)
 
-    return (relCoPrime, n), (gi, n)
+    return (rel_co_prime, n), (gi, n)
 
 
-def encrypt(privatekey, message):
+def encrypt(private_key, message):
     # Encrypt ==> (message^x) % PQ
-    # break up privatekey tuple
-    # privatekey = (relCoPrime, n), (gi, n)
+    # break up private_key tuple
+    # private_key = (relCoPrime, n), (gi, n)
     # 2 degree tuple (relCoPrime, n) + (gi, n)
-    lhs1, rhs1 = privatekey
+    lhs1, rhs1 = private_key
     lhs2, rhs2 = lhs1
     print(lhs1)
     print(rhs1)
     # of ((a,b) ,(c,d))
     # what are x , y?
 
-    encryptedmessage = [(ord(char) ** lhs2) % lhs1 for char in message]
-    print('Encrypted Message: ', encryptedmessage)
-    return encryptedmessage
+    encrypted_message = [(ord(char) ** lhs2) % lhs1 for char in message]
+    print('Encrypted Message: ', encrypted_message)
+    return encrypted_message
 
 
-def decrypt(publickey, encryptedmessage):
+def decrypt(public_key, encrypted_message):
     # Decryption Process : (message^y) % PQ
-    # break up publickey tuple
-    # publickey = (relCoPrime, n), (gi, n)
-    lhs1, rhs1 = publickey
+    # break up public_key tuple
+    # public_key = (relCoPrime, n), (gi, n)
+    lhs1, rhs1 = public_key
     lhs2, rhs2 = lhs1
 
-    decryptedmessage = [chr((char ** lhs2) % lhs1) for char in encryptedmessage]
-    return decryptedmessage
+    decrypted_message = [chr((char ** lhs2) % lhs1) for char in encrypted_message]
+    return decrypted_message
 
 
 initialise()
