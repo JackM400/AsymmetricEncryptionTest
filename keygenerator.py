@@ -1,6 +1,6 @@
 import math
 import random
-
+import sys
 
 # check if number provided is prime
 def prime_check(number):
